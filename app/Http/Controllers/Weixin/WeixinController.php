@@ -35,8 +35,20 @@ class WeixinController extends Controller
         if($event == 'subscribe'){
             $sub_time = $xml->CreateTime;
             $user_info = $this -> getUserInfo($openid);
-            var_dump($user_info);
-
+            $u = WxModel::where(['openid' => $openid])->first();
+            if($u){
+                echo '用户已存在';
+            }else{
+                $data = [
+                    'openid' => $openid,
+                    'add_time' => time(),
+                    'nickname' => $user_info['nickname'],
+                    'sex' => $user_info['sex'],
+                    'headimgurl' => $user_info['headimgurl'],
+                    'subscribe_time' => $user_info['subscribe_time']
+                ];
+                WxModel::insert($data);
+            }
         }
     }
 
