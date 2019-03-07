@@ -35,10 +35,13 @@ class WeixinController extends Controller
         if($event == 'subscribe'){
             $sub_time = $xml->CreateTime;
             $user_info = $this -> getUserInfo($openid);
+            //var_dump($user_info);exit;
             $u = WxModel::where(['openid' => $openid])->first();
             if($u){
                 echo '用户已存在';
             }else{
+                $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[欢迎关注]]></MsgType><Content><![CDATA['. date('Y-m-d H:i:s') .']]></Content></xml>';
+                echo $xml_response;
                 $data = [
                     'openid' => $openid,
                     'add_time' => time(),
@@ -47,7 +50,8 @@ class WeixinController extends Controller
                     'headimgurl' => $user_info['headimgurl'],
                     'subscribe_time' => $user_info['subscribe_time']
                 ];
-                WxModel::insert($data);
+                $id = WxModel::insertGetId($data);
+                var_dump($id);
             }
         }
     }
