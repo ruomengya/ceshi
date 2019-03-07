@@ -51,7 +51,7 @@ class WeixinController extends Controller
                     'subscribe_time' => $user_info['subscribe_time']
                 ];
                 $id = WxModel::insertGetId($data);
-                var_dump($id);
+                //var_dump($id);
             }
         }
     }
