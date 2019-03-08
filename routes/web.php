@@ -24,4 +24,6 @@ Route::get('/index','Weixin\WeixinController@getUserInfo');
 
 Route::get('/menu','Weixin\WeixinController@menu');
 
+Route::any('/wx_menu','Weixin\WeixinController@wx_menu');
+
 Route::get('/delmenu','Weixin\WeixinController@delmenu');

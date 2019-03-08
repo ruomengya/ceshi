@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Weixin;
 
+use GuzzleHttp;
 use App\Model\WxModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -73,7 +74,21 @@ class WeixinController extends Controller
 
     public function menu(){
 
-
         return view('menu.menu');
+    }
+
+    public function wx_menu(Request $request){
+        $data = $request->input();
+        $info = [
+            'button' => $data
+        ];
+        $access_token = WxModel::getAccessToken();
+        $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$access_token;
+        $client = new GuzzleHttp\Client();
+        $a = $client->request('post',$url,[
+           'body'=> json_encode($info,JSON_UNESCAPED_UNICODE)
+        ]);
+        $reponse = json_decode($a->getBody(),true);
+        prinr_r($reponse);
     }
 }
