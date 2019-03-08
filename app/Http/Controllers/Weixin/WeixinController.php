@@ -89,6 +89,6 @@ class WeixinController extends Controller
            'body'=> json_encode($info,JSON_UNESCAPED_UNICODE)
         ]);
         $reponse = json_decode($a->getBody(),true);
-        prinr_r($reponse);
+        print_r($reponse);
     }
 }
