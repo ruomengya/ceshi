@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Weixin;
 
-use GuzzleHttp\Client;
+use GuzzleHttp;
 use App\Model\WxModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
