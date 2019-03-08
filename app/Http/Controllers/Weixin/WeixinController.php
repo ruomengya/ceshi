@@ -56,11 +56,24 @@ class WeixinController extends Controller
         }
     }
 
+    public function delmenu(){
+        $access_token = WxModel::getAccessToken();
+        $url = 'https://api.weixin.qq.com/cgi-bin/menu/delete?access_token='.$access_token;
+        echo $url;
+
+    }
+
     //获取微信用户信息
     public function getUserInfo($openid){
         $access_token = WxModel::getAccessToken();
         $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$access_token.'&openid='.$openid.'&lang=zh_CN';
         $data = json_decode(file_get_contents($url) , true);
         return $data;
+    }
+
+    public function menu(){
+
+
+        return view('menu.menu');
     }
 }
